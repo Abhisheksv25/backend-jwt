@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MY APP</title>
+</head>
+<body>
+
+  <h1 data-position="header">Sign-Up Form</h1>
+  <h2>Fill this Sign-Up Form to create a new User</h2>
+
+  <section data-position="add-user">
+    <form action="/user" method="POST">
+      <label>Name</label>
+        <input type="text" placeholder="Name" name="name">
+
+      <br>
+      <br>
+
+        <label>E-mail</label>
+        <input type="text" placeholder="E-mail" name="email">
+
+    <br>
+      <br>
+
+        <label>Address</label>
+        <input type="text" placeholder="Address" name="Address">
+
+      <br>
+      <br>
+        
+        <label>Password</label>
+        <input type="password" placeholder="Password" name="password">
+
+      <br>
+      <br>
+
+      <label>Gender</label>
+      <select id="gender" name="gender">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other gender">Other gender</option>
+      </select>
+      <br>
+      <br>
+
+      <label>Hobbies</label>
+      <input type="text" name="hobbies" placeholder="Hobbies">
+      <br>
+      <br>
+      
+        <button type="submit">Submit</button>
+    
+    </form>
+
+<h4>Login to your account if account exist aldready</h4>
+</section>
+ <form action="/login" method="GET" >
+      <button type="submit">login</button>
+    </form>
+
+  <h2> User Details </h2>
+
+  <ul class="user">
+
+     <% for(var i = 0; i < user.length; i++) {%>
+       <li class="info">
+        Id:
+          <span><%= user[i]._id %></span>
+      
+          <br>Name:
+          <span><%= user[i].name %></span>
+      
+          <br>Email :
+        <span><%= user[i].email %></span>
+      
+          <br>Address :
+          <span><%= user[i].Address %></span>
+      
+          <br>Password :
+        <span><%= user[i].password %></span>
+
+           <br>Gender :
+          <span><%= user[i].gender %></span>
+
+          <br>Hobbies :
+          <span><%= user[i].hobbies %></span>
+        
+          <br>
+          <br>
+    
+      </li>
+
+      <% } %>
+  </ul>
+  
+
+    </div>
+
+    <div id="message"></div>
+
+    <script type="text/javascript" src="./main.js"></script>
+
+  </section>
+
+
+</body>
+</html>

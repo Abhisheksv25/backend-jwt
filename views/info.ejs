@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MY APP</title>
+</head>
+<body>
+
+	<h1 data-position="header">Dashboard</h1>
+
+</section>
+
+	<h2> User Details </h2>
+
+	<ul class="user">
+
+   		 <li class="info">
+    		Id:
+      		<span><%= user._id %></span>
+      
+       		<br>Name:
+      		<span><%= user.name %></span>
+      
+      		<br>Email :
+		    <span><%= user.email %></span>
+      
+      		<br>Address :
+      		<span><%= user.Address %></span>
+      
+      		<br>Gender :
+		    <span><%= user.gender %></span>
+
+          <br>Hobbies :
+          <span><%= user.hobbies %></span>
+			
+      		<br>
+    
+    	</li>
+
+	</ul>
+
+
+
+<br><br><br>
+
+<form action="/auth" method="POST" >
+	<button  >click to go to authenticated Page</button>
+  </form>
+<br><br>
+<form method="POST" action='/logout'>
+      
+      <button type="submit">log out</button>
+    
+</form>
+
+<span></span>
+</body>
+</html>
