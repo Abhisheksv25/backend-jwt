@@ -32,7 +32,7 @@ console.log('Shaastra Registration')
     .then(client => {
     console.log('Connected to Database')
     const db = client.db('webops7')
-    const storeData = db.collection('user')
+    const storeData = db.collection('tokens')
 
     
     app.set('view engine', 'ejs')
@@ -47,7 +47,7 @@ console.log('Shaastra Registration')
           if(sess.email) {
             res.redirect('/info');
           }
-          db.collection('user').find().toArray()
+          db.collection('tokens').find().toArray()
           .then(user => {
           res.render('index.ejs', { user: user })
           })
@@ -57,7 +57,7 @@ console.log('Shaastra Registration')
       app.get('/info', (req, res) => {
           sess = req.session
 
-          db.collection('user').findOne({email:sess.email})
+          db.collection('tokens').findOne({email:sess.email})
           .then(user => {
           if(user){
             res.render('info.ejs', { user: user })
@@ -74,7 +74,7 @@ console.log('Shaastra Registration')
           if(sess.email) {
             res.redirect('/info');
           }
-          db.collection('user').find().toArray()
+          db.collection('tokens').find().toArray()
           .then(user => {
           res.render('login.ejs', { user: user })
            })
@@ -133,7 +133,7 @@ console.log('Shaastra Registration')
 
        app.post('/check', (req, res) => {
       
-           storeData.findOne({email:req.body.email}) // storeData = db.Collection('user')
+           storeData.findOne({email:req.body.email}) // storeData = db.Collection('tokens')
            .then(result => {
            bcrypt.compare(req.body.password, result.password, function(err, hash) {
              
@@ -168,14 +168,20 @@ console.log('Shaastra Registration')
 
 
         app.post('/user', (req, res) => {
-          req.body.photos = []
           bcrypt.hash(req.body.password, 10, function(err, hash) {
           req.body.password=hash
           storeData.insertOne(req.body)
          .then(result => {
               sess = req.session
               sess.email = req.body.email
-              res.redirect('/info')  
+              sess = req.session
+              const token = jwt.sign({
+                email:req.body.email,
+                id:result._id
+              },'Abhishek');
+              localStorage.set('jwt', token);
+              res.redirect('/info') ;
+               
           })
           .catch(error => console.error(error))
 
